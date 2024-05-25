@@ -2,7 +2,7 @@ import { IsDecimal, IsIn, IsNotEmpty, IsString, MaxLength, ValidateNested } from
 import { PropertyPriceUnit, PropertyAreaUnit, PropertyRequestType } from "../property-requests.types";
 import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS, PROPERTY_TYPES } from "../property-requests.consts";
 import { Type } from "class-transformer";
-import { DECIMAL_VALIDATION_OPTIONS } from "../../../../shared/constants";
+import { DECIMAL_VALIDATION_OPTIONS } from "../../../../core/constants";
 
 class AreaDto {
   @IsNotEmpty()

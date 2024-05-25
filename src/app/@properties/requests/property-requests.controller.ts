@@ -1,7 +1,7 @@
 import { Body, JsonController, Params, Patch, Post } from "routing-controllers";
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
-import { IdDto } from "../../../shared/dto";
+import { IdDto } from "../../../core/dto";
 
 @JsonController("/property-requests")
 export class PropertyRequestsController {

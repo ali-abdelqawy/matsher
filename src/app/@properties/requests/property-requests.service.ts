@@ -1,4 +1,4 @@
-import { OK_RESPONSE } from "../../../shared/constants";
+import { OK_RESPONSE } from "../../../core/constants";
 import { InsertPropertyRequestBody } from "./dto";
 import { UpdatePropertyRequestBody } from "./dto/update-property-request.dto";
 import { PropertyRequest } from "./property-requests.schema";

@@ -1,5 +1,5 @@
-import { Bcrypt } from "../../core";
-import { OK_RESPONSE } from "../../shared/constants";
+import { Bcrypt } from "../../core/utils";
+import { OK_RESPONSE } from "../../core/constants";
 import { InsertUserBody } from "./dto";
 import { User } from "./users.schema";
 

@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import path from "path";
-import { Mongo } from "./core";
+import { Mongo } from "./core/utils";
 import { createExpressServer } from "routing-controllers";
-import { ErrorHandler } from "./core";
+import { ErrorHandler } from "./core/middlewares";
 
 Mongo.get().connect();
 
