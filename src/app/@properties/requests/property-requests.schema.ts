@@ -1,5 +1,5 @@
 import { Schema, model, Types } from "mongoose";
-import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS, PROPERTY_TYPES } from "./property-request.consts";
+import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS, PROPERTY_TYPES } from "./property-requests.consts";
 
 export const AreaSchema = new Schema(
   {

@@ -1,6 +1,6 @@
 import { IsDecimal, IsIn, IsOptional, IsString, MaxLength } from "class-validator";
-import { PropertyPriceUnit, PropertyAreaUnit } from "../property-request.types";
-import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS } from "../property-request.consts";
+import { PropertyPriceUnit, PropertyAreaUnit } from "../property-requests.types";
+import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS } from "../property-requests.consts";
 import { DECIMAL_VALIDATION_OPTIONS } from "../../../../shared/constants";
 
 export class UpdatePropertyRequestBody {
