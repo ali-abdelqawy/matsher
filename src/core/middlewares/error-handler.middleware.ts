@@ -9,7 +9,7 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
     const VALIDATION_ERRORS_TAIL = "check 'errors' property for more info.";
     if (error?.message.endsWith(VALIDATION_ERRORS_TAIL)) {
       return res.status(status).send({
-        errors: this.handleValidationErrors(error.errors),
+        errors: this.formatValidationErrors(error.errors),
       });
     }
     return res.status(status).send({
@@ -17,11 +17,11 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
     });
   }
 
-  handleValidationErrors(validationErrors: ValidationError[]) {
+  formatValidationErrors(validationErrors: ValidationError[]) {
     const errors: any = {};
     validationErrors.forEach((error: ValidationError) => {
       errors[error.property] = (
-        error.constraints ? Object.values(error.constraints!) : this.handleValidationErrors(error.children!)
+        error.constraints ? Object.values(error.constraints!) : this.formatValidationErrors(error.children!)
       ).reverse();
     });
     return errors;
