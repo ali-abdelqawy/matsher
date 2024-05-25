@@ -20,9 +20,9 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
   handleValidationErrors(validationErrors: ValidationError[]) {
     const errors: any = {};
     validationErrors.forEach((error: ValidationError) => {
-      errors[error.property] = error.constraints
-        ? Object.values(error.constraints!)
-        : this.handleValidationErrors(error.children!);
+      errors[error.property] = (
+        error.constraints ? Object.values(error.constraints!) : this.handleValidationErrors(error.children!)
+      ).reverse();
     });
     return errors;
   }
@@ -37,6 +37,7 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
         message = "Request body is not valid JSON";
         break;
       default:
+        console.log(errorMessage);
         message = "Something went wrong";
         break;
     }
