@@ -1,7 +1,8 @@
-import { Body, JsonController, Post } from "routing-controllers";
+import { Body, JsonController, Post, Res } from "routing-controllers";
 import { UsersService } from "./users.service";
 import { InsertUserBody } from "./dto";
 import { LoginUserBody } from "./dto/login-user.dto";
+import { Response } from "express";
 
 @JsonController("/users")
 export class UsersController {
@@ -17,7 +18,7 @@ export class UsersController {
   }
 
   @Post("/login")
-  login(@Body() body: LoginUserBody) {
-    return this.usersService.login(body);
+  login(@Body() body: LoginUserBody, @Res() res: Response) {
+    return this.usersService.login(body, res);
   }
 }

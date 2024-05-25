@@ -1,8 +1,9 @@
-import { Bcrypt, HttpException } from "../../core/utils";
+import { Bcrypt, HttpCookie, HttpException, JWT } from "../../core/utils";
 import { OK_RESPONSE } from "../../core/constants";
 import { InsertUserBody } from "./dto";
 import { UserFilter, User } from "./users.schema";
 import { LoginUserBody } from "./dto/login-user.dto";
+import { Response } from "express";
 
 export class UsersService {
   async insertOne(body: InsertUserBody) {
@@ -14,7 +15,18 @@ export class UsersService {
     return User.exists(filter);
   }
 
-  async login(body: LoginUserBody) {
+  private assignToken(userId: string, res: Response) {
+    const token = JWT.encrypt({
+      payload: {
+        userId,
+      },
+      expiresIn: process.env.TOKEN_EXPIRES_IN,
+    });
+
+    HttpCookie.set("token", token, res);
+  }
+
+  async login(body: LoginUserBody, res: Response) {
     const { phone, password } = body;
 
     const user = await User.findOne({ status: "ACTIVE", phone }, { password: 1 });
@@ -26,6 +38,8 @@ export class UsersService {
     if (!arePasswordsMatched) {
       throw new HttpException(401, "incorrect user name or password");
     }
+
+    this.assignToken(user.id, res);
 
     return OK_RESPONSE;
   }
