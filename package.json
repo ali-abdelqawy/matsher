@@ -14,7 +14,7 @@
     "copy-dotenv": "node scripts/copy-dotenv",
     "preup:dev": "npm run copy-dotenv",
     "up:dev": "docker-compose -f compose.dev.yml up",
-    "up-rebuild": "npm run up:dev --build"
+    "up-rebuild": "docker-compose -f compose.dev.yml up --build"
   },
   "author": "Ali Khaled",
   "dependencies": {
