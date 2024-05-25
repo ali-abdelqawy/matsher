@@ -1,0 +1,26 @@
+{
+  "name": "matsher",
+  "version": "1.0.0",
+  "description": "A matching system that connects property requests with relevant ads based on specific criteria.",
+  "main": "src/index.js",
+  "scripts": {
+    "clean": "node scripts/clean",
+    "prebuild": "npm run clean",
+    "build": "swc src -d dist",
+    "prestart": "npm run build",
+    "start": "node dist/src/index",
+    "start:local": "nodemon --watch src --ext '*' --exec \"npm run start\""
+  },
+  "author": "Ali Khaled",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.3.12",
+    "@swc/core": "^1.5.7",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "nodemon": "^3.1.1",
+    "typescript": "^5.4.5"
+  }
+}
