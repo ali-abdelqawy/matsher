@@ -1,5 +1,5 @@
 import { registerDecorator, ValidationOptions } from "class-validator";
-import { PasswordChecker } from "../../../../core/password-checker";
+import { PasswordChecker } from "../../../../core";
 
 export function IsStrongPassword(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {

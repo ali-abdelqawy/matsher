@@ -1,6 +1,6 @@
 import { compare, hash } from "bcrypt";
 
-export abstract class Hash {
+export abstract class Bcrypt {
   private static saltRounds = 10;
 
   static async hash(plain: string) {
