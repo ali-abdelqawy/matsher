@@ -6,11 +6,6 @@ import { LoginUserBody } from "./dto/login-user.dto";
 import { Response } from "express";
 
 export class UsersService {
-  async insertOne(body: InsertUserBody) {
-    await User.create({ ...body, password: await Bcrypt.hash(body.password) });
-    return OK_RESPONSE;
-  }
-
   async exists(filter: UserFilter) {
     return User.exists(filter);
   }
@@ -24,6 +19,11 @@ export class UsersService {
     });
 
     HttpCookie.set("token", token, res);
+  }
+
+  async insertOne(body: InsertUserBody) {
+    await User.create({ ...body, password: await Bcrypt.hash(body.password) });
+    return OK_RESPONSE;
   }
 
   async login(body: LoginUserBody, res: Response) {
