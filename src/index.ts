@@ -1,4 +1,7 @@
 import express from "express";
+import { Mongo } from "./core/db";
+
+Mongo.get().connect();
 
 const app = express();
 
