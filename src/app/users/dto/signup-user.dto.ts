@@ -3,7 +3,7 @@ import { USER_ROLES } from "../users.consts";
 import { UserRole } from "../users.types";
 import { IsUniquePhone, IsStrongPassword } from "./rules";
 
-export class InsertUserBody {
+export class SignupUserBody {
   @IsNotEmpty()
   @Matches(/^[A-Za-z ]+$/)
   @MaxLength(100)
