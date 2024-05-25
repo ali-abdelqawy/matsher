@@ -1,10 +1,10 @@
 import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
-import { User } from "../../users.schema";
+import { UsersService } from "../../users.service";
 
 @ValidatorConstraint({ async: true })
 class IsUniquePhoneConstraint implements ValidatorConstraintInterface {
   async validate(phone: string) {
-    const exists = await User.exists({ phone });
+    const exists = await new UsersService().exists({ phone });
     return !exists;
   }
 }
