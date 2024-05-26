@@ -20,9 +20,9 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
   formatValidationErrors(validationErrors: ValidationError[]) {
     const errors: any = {};
     validationErrors.forEach((error: ValidationError) => {
-      errors[error.property] = (
-        error.constraints ? Object.values(error.constraints!) : this.formatValidationErrors(error.children!)
-      ).reverse();
+      errors[error.property] = error.constraints
+        ? Object.values(error.constraints!)
+        : this.formatValidationErrors(error.children!);
     });
     return errors;
   }
