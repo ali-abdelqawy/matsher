@@ -1,7 +1,7 @@
 import { Bcrypt, HttpCookie, HttpException, JWT } from "../../core/utils";
 import { OK_RESPONSE } from "../../core/constants";
 import { SignupUserBody, LoginUserBody } from "./dto";
-import { UserFilter, User } from "./users.schema";
+import { UserFilter, User, UserProjection } from "./users.schema";
 import { Response } from "express";
 
 export class UsersService {
