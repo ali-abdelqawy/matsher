@@ -17,7 +17,7 @@ export class UsersService {
       expiresIn: process.env.TOKEN_EXPIRES_IN,
     });
 
-    HttpCookie.set("token", token, res);
+    HttpCookie.set("token", token, res, process.env.TOKEN_EXPIRES_IN);
   }
 
   async signup(body: SignupUserBody, res: Response) {
