@@ -15,6 +15,6 @@ export abstract class HttpCookie {
   }
 
   static clear(name: string, res: Response) {
-    res.clearCookie(name, this.options);
+    res.clearCookie(name);
   }
 }

@@ -20,4 +20,9 @@ export class UsersController {
   login(@Body() body: LoginUserBody, @Res() res: Response) {
     return this.usersService.login(body, res);
   }
+
+  @Post("/logout")
+  logout(@Res() res: Response) {
+    return this.usersService.logout(res);
+  }
 }

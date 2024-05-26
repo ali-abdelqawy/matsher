@@ -45,4 +45,9 @@ export class UsersService {
 
     return OK_RESPONSE;
   }
+
+  logout(res: Response) {
+    HttpCookie.clear("token", res);
+    return OK_RESPONSE;
+  }
 }
