@@ -12,8 +12,8 @@ export class UsersController {
   }
 
   @Post()
-  signup(@Body() body: SignupUserBody) {
-    return this.usersService.signup(body);
+  signup(@Body() body: SignupUserBody, res: Response) {
+    return this.usersService.signup(body, res);
   }
 
   @Post("/login")

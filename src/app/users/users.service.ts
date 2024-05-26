@@ -20,8 +20,11 @@ export class UsersService {
     HttpCookie.set("token", token, res);
   }
 
-  async signup(body: SignupUserBody) {
-    await User.create({ ...body, password: await Bcrypt.hash(body.password) });
+  async signup(body: SignupUserBody, res: Response) {
+    const { id } = await User.create({ ...body, password: await Bcrypt.hash(body.password) });
+
+    this.assignToken(id, res);
+
     return OK_RESPONSE;
   }
 
