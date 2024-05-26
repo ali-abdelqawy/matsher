@@ -28,10 +28,14 @@ export class UsersService {
     return OK_RESPONSE;
   }
 
+  async findOne(filter: UserFilter, project: UserProjection) {
+    return User.findOne({ ...filter, status: "ACTIVE" }, project);
+  }
+
   async login(body: LoginUserBody, res: Response) {
     const { phone, password } = body;
 
-    const user = await User.findOne({ status: "ACTIVE", phone }, { password: 1 });
+    const user = await this.findOne({ phone }, { password: 1 });
     if (!user) {
       throw new HttpException(401, "incorrect user name or password");
     }
