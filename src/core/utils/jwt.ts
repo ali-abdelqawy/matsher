@@ -13,13 +13,13 @@ export abstract class JWT {
     return signature;
   }
 
-  public static decrypt(token: string) {
-    return decode(token) as JwtPayload;
+  public static decrypt(encrypted: string) {
+    return decode(encrypted) as JwtPayload;
   }
 
-  public static verify(options: { token: string; ignoreExpiration: boolean }) {
-    const { token, ignoreExpiration } = options;
-    return verify(token, this.secret, {
+  public static verify(options: { encrypted: string; ignoreExpiration: boolean }) {
+    const { encrypted, ignoreExpiration } = options;
+    return verify(encrypted, this.secret, {
       algorithms: [this.algorithm],
       ignoreExpiration,
     }) as JwtPayload;
