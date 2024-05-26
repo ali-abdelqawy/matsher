@@ -1,7 +1,8 @@
-import { Body, JsonController, Post, Res } from "routing-controllers";
+import { Body, JsonController, Post, Res, UseBefore } from "routing-controllers";
 import { UsersService } from "./users.service";
 import { SignupUserBody, LoginUserBody } from "./dto";
 import { Response } from "express";
+import { IsNotAuthenticated } from "../../core/middlewares";
 
 @JsonController("/users")
 export class UsersController {
@@ -11,11 +12,13 @@ export class UsersController {
     this.usersService = new UsersService();
   }
 
-  @Post()
+  @UseBefore(IsNotAuthenticated)
+  @Post("/signup")
   signup(@Body() body: SignupUserBody, @Res() res: Response) {
     return this.usersService.signup(body, res);
   }
 
+  @UseBefore(IsNotAuthenticated)
   @Post("/login")
   login(@Body() body: LoginUserBody, @Res() res: Response) {
     return this.usersService.login(body, res);

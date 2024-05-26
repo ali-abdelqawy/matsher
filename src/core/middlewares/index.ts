@@ -1,1 +1,1 @@
-export * from "./error-handler.middleware";
+export * from "./nonglobal/is-not-authenticated.middleware";
