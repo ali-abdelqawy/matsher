@@ -12,7 +12,7 @@ export class UsersController {
   }
 
   @Post()
-  signup(@Body() body: SignupUserBody, res: Response) {
+  signup(@Body() body: SignupUserBody, @Res() res: Response) {
     return this.usersService.signup(body, res);
   }
 
