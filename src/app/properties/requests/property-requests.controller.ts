@@ -1,4 +1,5 @@
-import { Body, JsonController, OnUndefined, Params, Patch, Post, UseBefore } from "routing-controllers";
+import { Response } from "express";
+import { Body, JsonController, OnUndefined, Params, Patch, Post, Res, UseBefore } from "routing-controllers";
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
 import { IdDto } from "../../../core/dto";
@@ -23,7 +24,12 @@ export class PropertyRequestsController {
 
   @Patch("/:id")
   @OnUndefined(STATUS_CODES.OK)
-  updateOne(@Params() params: IdDto, @Body() body: UpdatePropertyRequestBody) {
-    return this.service.updateOne(params.id, body);
+  updateOne(
+    @Params() params: IdDto,
+    @Body() body: UpdatePropertyRequestBody,
+    @User() user: LoggedUser,
+    @Res() res: Response
+  ) {
+    return this.service.updateOne(params.id, body, user._id, res);
   }
 }
