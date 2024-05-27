@@ -1,28 +1,14 @@
 import { isJWT } from "class-validator";
 import { Request, Response } from "express";
-import { ExpressMiddlewareInterface, Middleware } from "routing-controllers";
-import { HttpException, JWT, MiddlewareWhitelister } from "../../utils";
+import { HttpException, JWT, Obj } from "../../utils";
 import { UsersService } from "../../../app/users/users.service";
-import { HttpMethod } from "../../types";
+import { WHITELISTED, whitelist } from "../whitelist";
+import { Middleware } from "routing-controllers";
 
 @Middleware({ type: "before" })
-export class IsAuthenticated implements ExpressMiddlewareInterface {
-  whitelist(method: HttpMethod, path: string) {
-    return MiddlewareWhitelister.whitelist({ method, path }, [
-      {
-        method: "post",
-        path: "/users/signup",
-      },
-      {
-        method: "post",
-        path: "/users/login",
-      },
-    ]);
-  }
-
+export class Authenticate {
   async use(req: Request, res: Response, next: (err?: any) => any) {
-    const isWhitelisted = this.whitelist(req.method as HttpMethod, req.path);
-    if (isWhitelisted) {
+    if (whitelist(Obj.pick(req, ["method", "path"]), WHITELISTED.AUTH)) {
       return next();
     }
 
