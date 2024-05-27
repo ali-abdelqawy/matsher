@@ -29,6 +29,7 @@ const PropertyRequestSchemaDefinition = {
   district: { type: String, required: true },
   description: { type: String, required: true },
   refreshedAt: { type: Date, required: false },
+  createdBy: { type: Types.ObjectId, ref: "User", required: true },
 };
 
 const PropertyRequestSchema = new Schema(PropertyRequestSchemaDefinition, {
