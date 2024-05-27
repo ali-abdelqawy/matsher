@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "./core/globals";
 import path from "path";
 import express from "express";
 import { useExpressServer } from "routing-controllers";

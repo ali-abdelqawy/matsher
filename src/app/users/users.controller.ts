@@ -1,4 +1,4 @@
-import { Body, JsonController, Post, Res, UseBefore } from "routing-controllers";
+import { Body, JsonController, OnUndefined, Post, Res, UseBefore } from "routing-controllers";
 import { UsersService } from "./users.service";
 import { SignupUserBody, LoginUserBody } from "./dto";
 import { Response } from "express";
@@ -12,20 +12,23 @@ export class UsersController {
     this.usersService = new UsersService();
   }
 
-  @UseBefore(IsNotAuthenticated)
   @Post("/signup")
-  signup(@Body() body: SignupUserBody, @Res() res: Response) {
-    return this.usersService.signup(body, res);
+  @UseBefore(IsNotAuthenticated)
+  @OnUndefined(STATUS_CODES.CREATED)
+  async signup(@Body() body: SignupUserBody, @Res() res: Response) {
+    await this.usersService.signup(body, res);
   }
 
-  @UseBefore(IsNotAuthenticated)
   @Post("/login")
-  login(@Body() body: LoginUserBody, @Res() res: Response) {
-    return this.usersService.login(body, res);
+  @UseBefore(IsNotAuthenticated)
+  @OnUndefined(STATUS_CODES.OK)
+  async login(@Body() body: LoginUserBody, @Res() res: Response) {
+    await this.usersService.login(body, res);
   }
 
   @Post("/logout")
+  @OnUndefined(STATUS_CODES.OK)
   logout(@Res() res: Response) {
-    return this.usersService.logout(res);
+    this.usersService.logout(res);
   }
 }

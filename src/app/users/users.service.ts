@@ -1,5 +1,4 @@
 import { Bcrypt, HttpCookie, HttpException, JWT } from "../../core/utils";
-import { OK_RESPONSE } from "../../core/constants";
 import { SignupUserBody, LoginUserBody } from "./dto";
 import { UserFilter, User, UserProjection } from "./users.schema";
 import { Response } from "express";
@@ -24,8 +23,6 @@ export class UsersService {
     const { id } = await User.create({ ...body, password: await Bcrypt.hash(body.password) });
 
     this.assignToken(id, res);
-
-    return OK_RESPONSE;
   }
 
   async findOne(filter: UserFilter, project: UserProjection) {
@@ -46,12 +43,9 @@ export class UsersService {
     }
 
     this.assignToken(user.id, res);
-
-    return OK_RESPONSE;
   }
 
   logout(res: Response) {
     HttpCookie.clear("token", res);
-    return OK_RESPONSE;
   }
 }
