@@ -1,1 +1,1 @@
-export * from "./property-requests.controller";
+export * from "./property-requests.schema";

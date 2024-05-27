@@ -32,7 +32,7 @@ const PropertyRequestSchemaDefinition = {
   createdBy: { type: Types.ObjectId, ref: "User", required: true },
 };
 
-const PropertyRequestSchema = new Schema(PropertyRequestSchemaDefinition, {
+export const PropertyRequestSchema = new Schema(PropertyRequestSchemaDefinition, {
   timestamps: true,
 });
 
