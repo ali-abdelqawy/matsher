@@ -18,9 +18,10 @@ export const WHITELISTED: { [index: string]: Endpoint[] } = {
   ],
 };
 
-export const whitelist = (req: Endpoint, whitelisted: Endpoint[]) => {
+export const whitelist = (endpoint: Endpoint, whitelisted: Endpoint[]) => {
   return whitelisted.some(
-    (endpoint) =>
-      endpoint.method.toLowerCase() === req.method.toLowerCase() && endpoint.path.toLowerCase() === req.path.toLowerCase()
+    (allowed) =>
+      endpoint.method.toLowerCase() === allowed.method.toLowerCase() &&
+      endpoint.path.toLowerCase() === allowed.path.toLowerCase()
   );
 };
