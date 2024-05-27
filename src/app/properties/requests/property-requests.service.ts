@@ -15,6 +15,7 @@ export class PropertyRequestsService {
     const isCreator = await Gate.isCreator(id, PropertyRequest, userId);
     if (!isCreator) {
       res.sendStatus(403);
+      return;
     }
 
     await PropertyRequest.updateOne({ _id: id }, { $set: body });

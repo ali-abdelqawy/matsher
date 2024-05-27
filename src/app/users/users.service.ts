@@ -35,11 +35,13 @@ export class UsersService {
     const user = await this.findOne({ phone }, { password: 1 });
     if (!user) {
       res.sendStatus(401);
+      return;
     }
 
     const arePasswordsMatched = await Bcrypt.compare(password, user!.password);
     if (!arePasswordsMatched) {
       res.sendStatus(401);
+      return;
     }
 
     this.assignToken(user!.id, res);

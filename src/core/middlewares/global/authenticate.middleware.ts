@@ -15,18 +15,21 @@ export class Authenticate {
     const { token } = req.cookies;
     if (!token || !isJWT(token)) {
       res.sendStatus(401);
+      return;
     }
 
     try {
       JWT.verify({ encrypted: token, ignoreExpiration: false });
     } catch (error) {
       res.sendStatus(401);
+      return;
     }
 
     const { userId } = JWT.decrypt(token);
     const user = await new UsersService().findOne({ _id: userId }, { name: 1, phone: 1, role: 1 });
     if (!user) {
       res.sendStatus(401);
+      return;
     }
 
     res.locals.user = user!.toJSON();
