@@ -5,3 +5,4 @@ export * from "./http-exception";
 export * from "./jwt";
 export * from "./http-cookie";
 export * from "./obj";
+export * from "./gate";
