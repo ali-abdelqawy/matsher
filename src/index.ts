@@ -9,7 +9,9 @@ import cookieParser from "cookie-parser";
 Mongo.get().connect();
 
 let app = express();
+
 app.use(cookieParser());
+
 app = useExpressServer(app, {
   routePrefix: "/api",
   validation: {
