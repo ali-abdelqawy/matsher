@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm install -g nodemon @swc/core @swc/cli
 RUN npm install
 
 COPY . .
