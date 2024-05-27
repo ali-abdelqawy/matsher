@@ -1,4 +1,4 @@
-import { Bcrypt, HttpCookie, HttpException, JWT } from "../../core/utils";
+import { Bcrypt, HttpCookie, JWT } from "../../core/utils";
 import { SignupUserBody, LoginUserBody } from "./dto";
 import { UserFilter, User, UserProjection } from "./users.schema";
 import { Response } from "express";
@@ -34,15 +34,15 @@ export class UsersService {
 
     const user = await this.findOne({ phone }, { password: 1 });
     if (!user) {
-      throw new HttpException(401, "incorrect user name or password");
+      res.sendStatus(401);
     }
 
-    const arePasswordsMatched = await Bcrypt.compare(password, user.password);
+    const arePasswordsMatched = await Bcrypt.compare(password, user!.password);
     if (!arePasswordsMatched) {
-      throw new HttpException(401, "incorrect user name or password");
+      res.sendStatus(401);
     }
 
-    this.assignToken(user.id, res);
+    this.assignToken(user!.id, res);
   }
 
   logout(res: Response) {
