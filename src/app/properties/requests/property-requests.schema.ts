@@ -1,7 +1,7 @@
 import { Schema, model, Types, InferRawDocType, FilterQuery } from "mongoose";
 import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS, PROPERTY_TYPES } from "./property-requests.consts";
 
-export const AreaSchema = new Schema(
+const AreaSchema = new Schema(
   {
     value: { type: Types.Decimal128, required: true },
     unit: { type: String, enum: PROPERTY_AREA_UNITS, required: true },
@@ -11,7 +11,7 @@ export const AreaSchema = new Schema(
   }
 );
 
-export const PriceSchema = new Schema(
+const PriceSchema = new Schema(
   {
     value: { type: Types.Decimal128, required: true },
     unit: { type: String, enum: PROPERTY_PRICE_UNITS, required: true },
