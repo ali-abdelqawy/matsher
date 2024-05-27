@@ -1,11 +1,13 @@
-import { Body, JsonController, OnUndefined, Params, Patch, Post } from "routing-controllers";
+import { Body, JsonController, OnUndefined, Params, Patch, Post, UseBefore } from "routing-controllers";
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
 import { IdDto } from "../../../core/dto";
 import { User } from "../../../core/decortators";
 import { LoggedUser } from "../../users";
+import { Authorize } from "../../../core/middlewares";
 
 @JsonController("/property-requests")
+@UseBefore(Authorize(new Set(["CLIENT"])))
 export class PropertyRequestsController {
   private service: PropertyRequestsService;
 
