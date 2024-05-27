@@ -1,4 +1,4 @@
-import { Schema, model, Types, InferRawDocType } from "mongoose";
+import { Schema, model, Types, InferRawDocType, FilterQuery } from "mongoose";
 import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS, PROPERTY_TYPES } from "./property-requests.consts";
 
 export const AreaSchema = new Schema(
@@ -36,4 +36,4 @@ const PropertyRequestSchema = new Schema(PropertyRequestSchemaDefinition, {
 });
 
 export const PropertyRequest = model("PropertyRequest", PropertyRequestSchema);
-export type PropertyRequestFilter = Partial<InferRawDocType<typeof PropertyRequestSchemaDefinition>>;
+export type PropertyRequestFilter = FilterQuery<InferRawDocType<typeof PropertyRequestSchemaDefinition>>;

@@ -1,4 +1,4 @@
-import { InferRawDocType, Schema, model } from "mongoose";
+import { FilterQuery, InferRawDocType, Schema, model } from "mongoose";
 import { USER_ROLES, USER_STATUSES } from "./users.consts";
 import { ProjectionType } from "mongoose";
 
@@ -15,5 +15,5 @@ const UserSchema = new Schema(UserSchemaDefinition, {
 });
 
 export const User = model("User", UserSchema);
-export type UserFilter = Partial<InferRawDocType<typeof UserSchemaDefinition>> & { _id?: string };
+export type UserFilter = FilterQuery<InferRawDocType<typeof UserSchemaDefinition>>;
 export type UserProjection = ProjectionType<UserFilter>;
