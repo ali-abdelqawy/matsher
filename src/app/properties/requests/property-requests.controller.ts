@@ -3,7 +3,7 @@ import { Body, JsonController, OnUndefined, Params, Patch, Post, Res, UseBefore 
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
 import { IdDto } from "../../../core/dto";
-import { User } from "../../../core/decortators";
+import { User } from "../../../core/decorators";
 import { LoggedUser } from "../../users";
 import { Authorize } from "../../../core/middlewares";
 
