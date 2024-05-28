@@ -21,20 +21,22 @@ const PriceSchema = new Schema(
   }
 );
 
-const PropertyRequestSchemaDefinition = {
+export const PropertyRequestSchemaDefinition = {
   propertyType: { type: String, enum: PROPERTY_TYPES, required: true },
   area: AreaSchema,
   price: PriceSchema,
   city: { type: String, required: true },
   district: { type: String, required: true },
   description: { type: String, required: true },
-  refreshedAt: { type: Date, required: false },
+  refreshedAt: { type: Date, required: false, default: new Date() },
   createdBy: { type: Types.ObjectId, ref: "User", required: true },
 };
 
-export const PropertyRequestSchema = new Schema(PropertyRequestSchemaDefinition, {
+const PropertyRequestSchema = new Schema(PropertyRequestSchemaDefinition, {
   timestamps: true,
 });
+
+PropertyRequestSchema.index({ area: 1, price: 1, district: 1 });
 
 export const PropertyRequest = model("PropertyRequest", PropertyRequestSchema);
 export type PropertyRequestFilter = FilterQuery<InferRawDocType<typeof PropertyRequestSchemaDefinition>>;
