@@ -24,7 +24,6 @@ export class PropertyAdsController {
 
   @Get("/:id/relevant-requests")
   @UseBefore(Authorize(new Set(["CLIENT"])))
-  @OnUndefined(STATUS_CODES.CREATED)
   findRelevantRequests(@Params() params: IdDto, @QueryParams() query: FindRelevantRequestsQuery) {
     return this.service.findRelevantRequests(params.id, query);
   }
