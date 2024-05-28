@@ -23,4 +23,6 @@ app = useExpressServer(app, {
   controllers: [path.join(`${__dirname}/**/*.controller.{js,ts}`)],
 });
 
-app.listen(process.env.PORT, () => console.log("matsher api is up and running!"));
+app
+  .listen(process.env.PORT, () => console.log("matsher api is up and running!"))
+  .setTimeout(Number(process.env.SERVER_TIMEOUT_IN_MS));
