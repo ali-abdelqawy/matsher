@@ -31,6 +31,7 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
     let message = "";
     switch (errorName) {
       case "HttpException":
+      case "ParamNormalizationError":
         message = errorMessage;
         break;
       case "SyntaxError":
