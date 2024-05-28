@@ -1,4 +1,5 @@
 import mongoose, { Mongoose } from "mongoose";
+import { FilterDto } from "../dto";
 
 export class Mongo {
   private static instance: Mongo;
@@ -19,5 +20,14 @@ export class Mongo {
   public async connect() {
     await this.db.connect(process.env.DB_HOST);
     console.log("mongo db is up and running!");
+  }
+
+  public static formatFilter(options: FilterDto & { fields: string[] }) {
+    const { fields, limit, page } = options;
+    return {
+      skip: (page - 1) * limit,
+      limit,
+      project: fields.reduce((acc, field) => ({ ...acc, [field]: 1 }), {}),
+    };
   }
 }
