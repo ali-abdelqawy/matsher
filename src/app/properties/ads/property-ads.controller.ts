@@ -1,9 +1,11 @@
-import { Body, JsonController, OnUndefined, Post, UseBefore } from "routing-controllers";
-import { PropertyAdsService } from "./property-requests.service";
+import { Body, Get, JsonController, OnUndefined, Params, Post, QueryParams, UseBefore } from "routing-controllers";
+import { PropertyAdsService } from "./property-ads.service";
 import { InsertPropertyRequestBody } from "../requests/dto";
 import { User } from "../../../core/decorators";
 import { LoggedUser } from "../../users";
 import { Authorize } from "../../../core/middlewares";
+import { IdDto } from "../../../core/dto";
+import { FindRelevantRequestsQuery } from "./dto";
 
 @JsonController("/property-ads", { transformResponse: false })
 export class PropertyAdsController {
@@ -18,5 +20,12 @@ export class PropertyAdsController {
   @OnUndefined(STATUS_CODES.CREATED)
   insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
     return this.service.insertOne(body, user);
+  }
+
+  @Get("/:id/relevant-requests")
+  @UseBefore(Authorize(new Set(["CLIENT"])))
+  @OnUndefined(STATUS_CODES.CREATED)
+  findRelevantRequests(@Params() params: IdDto, @QueryParams() query: FindRelevantRequestsQuery) {
+    return this.service.findRelevantRequests(params.id, query);
   }
 }

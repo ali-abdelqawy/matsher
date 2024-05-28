@@ -1,5 +1,7 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose, { Model, Mongoose } from "mongoose";
 import { FilterDto } from "../dto";
+import { AggregateOptions } from "mongoose";
+import { Paginator } from "./paginator";
 
 export class Mongo {
   private static instance: Mongo;
@@ -29,5 +31,17 @@ export class Mongo {
       limit,
       project: fields.reduce((acc, field) => ({ ...acc, [field]: 1 }), {}),
     };
+  }
+
+  public static async aggregate(params: {
+    model: Model<any>;
+    pipelineStages: any[];
+    aggOptions: AggregateOptions;
+    limit: number;
+    page: number;
+  }) {
+    const { model, pipelineStages, aggOptions, limit, page } = params;
+    const [{ data, meta } = { data: [], meta: {} }] = await model.aggregate(pipelineStages, aggOptions);
+    return { data, ...Paginator.getMetadata(meta.total, limit, page) };
   }
 }
