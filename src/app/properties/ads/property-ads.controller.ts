@@ -14,6 +14,7 @@ export class PropertyAdsController {
   }
 
   @Post()
+  @UseBefore(Authorize(new Set(["AGENT"])))
   @OnUndefined(STATUS_CODES.CREATED)
   insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
     return this.service.insertOne(body, user);
