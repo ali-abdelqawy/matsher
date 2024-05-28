@@ -4,7 +4,7 @@ import { SignupUserBody, LoginUserBody } from "./dto";
 import { Response } from "express";
 import { IsNotAuthenticated } from "../../core/middlewares";
 
-@JsonController("/users")
+@JsonController("/users", { transformResponse: false })
 export class UsersController {
   private service: UsersService;
 

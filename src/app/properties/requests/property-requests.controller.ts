@@ -7,7 +7,7 @@ import { User } from "../../../core/decorators";
 import { LoggedUser } from "../../users";
 import { Authorize } from "../../../core/middlewares";
 
-@JsonController("/property-requests")
+@JsonController("/property-requests", { transformResponse: false })
 @UseBefore(Authorize(new Set(["CLIENT"])))
 export class PropertyRequestsController {
   private service: PropertyRequestsService;

@@ -5,8 +5,7 @@ import { User } from "../../../core/decorators";
 import { LoggedUser } from "../../users";
 import { Authorize } from "../../../core/middlewares";
 
-@JsonController("/property-ads")
-@UseBefore(Authorize(new Set(["AGENT"])))
+@JsonController("/property-ads", { transformResponse: false })
 export class PropertyAdsController {
   private service: PropertyAdsService;
 
