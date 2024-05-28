@@ -21,7 +21,7 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
     const errors: any = {};
     validationErrors.forEach((error: ValidationError) => {
       errors[error.property] = error.constraints
-        ? Object.values(error.constraints!)
+        ? Object.values(error.constraints!).toReversed()
         : this.formatValidationErrors(error.children!);
     });
     return errors;
