@@ -1,4 +1,10 @@
-import { model } from "mongoose";
-import { PropertyRequestSchema } from "../requests";
+import { Schema, model } from "mongoose";
+import { PropertyRequestSchemaDefinition } from "../requests";
 
-export const PropertyAd = model("PropertyAd", PropertyRequestSchema);
+const PropertyRequestAdSchema = new Schema(PropertyRequestSchemaDefinition, {
+  timestamps: true,
+});
+
+export const PropertyAdSelectableFields = Object.keys(PropertyRequestSchemaDefinition);
+
+export const PropertyAd = model("PropertyAd", PropertyRequestAdSchema);
