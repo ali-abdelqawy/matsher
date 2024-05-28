@@ -7,7 +7,7 @@ import { FindRelevantRequestsPipe } from "./pipelines";
 
 export class PropertyAdsService {
   async insertOne(body: InsertPropertyRequestBody, user: LoggedUser) {
-    await PropertyAd.create({ ...body, createdBy: user._id });
+    await PropertyAd.create({ ...body, createdById: user._id });
   }
 
   async findRelevantRequests(id: string, query: FindRelevantRequestsQuery) {

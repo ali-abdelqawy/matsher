@@ -8,7 +8,7 @@ import { Response } from "express";
 
 export class PropertyRequestsService {
   async insertOne(body: InsertPropertyRequestBody, user: LoggedUser) {
-    await PropertyRequest.create({ ...body, createdBy: user._id });
+    await PropertyRequest.create({ ...body, createdById: user._id });
   }
 
   async updateOne(id: string, body: UpdatePropertyRequestBody, userId: ObjectId, res: Response) {
