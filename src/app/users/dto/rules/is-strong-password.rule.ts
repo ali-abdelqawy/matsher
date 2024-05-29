@@ -6,7 +6,7 @@ export function IsStrongPassword(validationOptions?: ValidationOptions) {
     registerDecorator({
       name: "isStrongPassword",
       target: object.constructor,
-      propertyName: propertyName,
+      propertyName,
       options: validationOptions,
       validator: {
         validate(value: any) {
