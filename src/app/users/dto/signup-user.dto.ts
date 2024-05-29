@@ -3,7 +3,7 @@ import { USER_ROLES } from "../users.consts";
 import { UserRole } from "../users.types";
 import { IsUniquePhone, IsStrongPassword } from "./rules";
 
-export class SignupUserBody {
+export class SignupBaseUserDto {
   @IsNotEmpty()
   @Matches(/^[A-Za-z ]+$/)
   @MaxLength(100)
@@ -15,10 +15,6 @@ export class SignupUserBody {
   phone: string;
 
   @IsNotEmpty()
-  @IsIn(USER_ROLES.filter((role) => role !== "ADMIN"))
-  role: Omit<UserRole, "ADMIN">;
-
-  @IsNotEmpty()
   @IsString()
   @MinLength(20)
   @MaxLength(50)
@@ -26,4 +22,10 @@ export class SignupUserBody {
     message: "password must be strong, you generate a strong one using this website: https://passwordsgenerator.net/",
   })
   password: string;
+}
+
+export class SignupUserBody extends SignupBaseUserDto {
+  @IsNotEmpty()
+  @IsIn(USER_ROLES.filter((role) => role !== "ADMIN"))
+  role: Omit<UserRole, "ADMIN">;
 }

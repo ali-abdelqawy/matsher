@@ -1,5 +1,5 @@
 import { Bcrypt, HttpCookie, JWT } from "../../core/utils";
-import { SignupUserBody, LoginUserBody } from "./dto";
+import { LoginUserBody, SignupBaseUserDto } from "./dto";
 import { UserFilter, User, UserProjection } from "./users.schema";
 import { Response } from "express";
 
@@ -19,8 +19,12 @@ export class UsersService {
     HttpCookie.set("token", token, res, process.env.TOKEN_EXPIRES_IN);
   }
 
-  async signup(body: SignupUserBody, res: Response) {
+  async signup(body: SignupBaseUserDto, res: Response, assignToken: boolean) {
     const { id } = await User.create({ ...body, password: await Bcrypt.hash(body.password) });
+
+    if (!assignToken) {
+      return;
+    }
 
     this.assignToken(id, res);
   }
