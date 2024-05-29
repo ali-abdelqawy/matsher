@@ -15,8 +15,8 @@ export class SignupUserBody {
   phone: string;
 
   @IsNotEmpty()
-  @IsIn(USER_ROLES)
-  role: UserRole;
+  @IsIn(USER_ROLES.filter((role) => role !== "ADMIN"))
+  role: Omit<UserRole, "ADMIN">;
 
   @IsNotEmpty()
   @IsString()
