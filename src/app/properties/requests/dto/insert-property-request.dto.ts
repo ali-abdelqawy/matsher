@@ -1,28 +1,6 @@
-import { IsDecimal, IsIn, IsNotEmpty, IsString, MaxLength, ValidateNested } from "class-validator";
-import { PropertyPriceUnit, PropertyAreaUnit, PropertyRequestType } from "../property-requests.types";
-import { PROPERTY_AREA_UNITS, PROPERTY_PRICE_UNITS, PROPERTY_TYPES } from "../property-requests.consts";
-import { Type } from "class-transformer";
-import { DECIMAL_VALIDATION } from "../../../../core/constants";
-
-class AreaDto {
-  @IsNotEmpty()
-  @IsDecimal(DECIMAL_VALIDATION.options, { message: `$property ${DECIMAL_VALIDATION.on_error_msg}` })
-  value: string;
-
-  @IsNotEmpty()
-  @IsIn(PROPERTY_AREA_UNITS)
-  unit: PropertyAreaUnit;
-}
-
-class PriceDto {
-  @IsNotEmpty()
-  @IsDecimal(DECIMAL_VALIDATION.options, { message: `$property ${DECIMAL_VALIDATION.on_error_msg}` })
-  value: string;
-
-  @IsNotEmpty()
-  @IsIn(PROPERTY_PRICE_UNITS)
-  unit: PropertyPriceUnit;
-}
+import { IsDecimal, IsIn, IsNotEmpty, IsString, MaxLength } from "class-validator";
+import { PropertyRequestType } from "../property-requests.types";
+import { PROPERTY_TYPES } from "../property-requests.consts";
 
 export class InsertPropertyRequestBody {
   @IsNotEmpty()
@@ -30,14 +8,12 @@ export class InsertPropertyRequestBody {
   propertyType: PropertyRequestType;
 
   @IsNotEmpty()
-  @ValidateNested()
-  @Type(() => AreaDto)
-  area: AreaDto;
+  @IsDecimal()
+  areaMeters: string;
 
   @IsNotEmpty()
-  @ValidateNested()
-  @Type(() => PriceDto)
-  price: PriceDto;
+  @IsDecimal()
+  priceSar: string;
 
   @IsNotEmpty()
   @IsString()

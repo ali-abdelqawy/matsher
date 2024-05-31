@@ -9,10 +9,10 @@ export const FindRelevantRequestsPipe = (id: string, skip: number, limit: number
   {
     $project: {
       _id: 0,
-      area: 1,
-      "price.value": 1,
+      areaMeters: 1,
+      priceSar: 1,
       priceByTen: {
-        $divide: ["$price.value", new Types.Decimal128("10.00")],
+        $divide: ["$priceSar", { $toDecimal: "10.00" }],
       },
       district: 1,
     },
@@ -23,12 +23,12 @@ export const FindRelevantRequestsPipe = (id: string, skip: number, limit: number
       let: {
         district: "$district",
         minPrice: {
-          $subtract: ["$price.value", "$priceByTen"],
+          $subtract: ["$priceSar", "$priceByTen"],
         },
         maxPrice: {
-          $add: ["$price.value", "$priceByTen"],
+          $add: ["$priceSar", "$priceByTen"],
         },
-        area: "$area",
+        areaMeters: "$areaMeters",
       },
       pipeline: [
         {
@@ -36,16 +36,13 @@ export const FindRelevantRequestsPipe = (id: string, skip: number, limit: number
             $expr: {
               $and: [
                 {
-                  $eq: ["$area.value", "$$area.value"],
+                  $eq: ["$areaMeters", "$$areaMeters"],
                 },
                 {
-                  $eq: ["$area.unit", "$$area.unit"],
+                  $gte: ["$priceSar", "$$minPrice"],
                 },
                 {
-                  $gte: ["$price.value", "$$minPrice"],
-                },
-                {
-                  $lte: ["$price.value", "$$maxPrice"],
+                  $lte: ["$priceSar", "$$maxPrice"],
                 },
                 {
                   $eq: ["$district", "$$district"],
@@ -56,8 +53,8 @@ export const FindRelevantRequestsPipe = (id: string, skip: number, limit: number
         },
         {
           $addFields: {
-            "area.value": { $toString: "$area.value" },
-            "price.value": { $toString: "$price.value" },
+            areaMeters: { $toString: "$areaMeters" },
+            priceSar: { $toString: "$priceSar" },
           },
         },
         {
