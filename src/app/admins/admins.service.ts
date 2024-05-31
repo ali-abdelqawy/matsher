@@ -1,4 +1,3 @@
-import { Response } from "express";
 import { SignupUserBody } from "../users/dto";
 import { UsersService } from "../users/users.service";
 
@@ -9,7 +8,7 @@ export class AdminsService {
     this.usersService = new UsersService();
   }
 
-  async signup(body: SignupUserBody, res: Response) {
-    await this.usersService.signup(body, res, false);
+  async insertOne(body: SignupUserBody) {
+    await this.usersService.insertOne(body);
   }
 }

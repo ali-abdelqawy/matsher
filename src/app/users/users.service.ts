@@ -19,13 +19,12 @@ export class UsersService {
     HttpCookie.set("token", token, res, process.env.TOKEN_EXPIRES_IN);
   }
 
-  async signup(body: SignupBaseUserDto, res: Response, assignToken: boolean) {
-    const { id } = await User.create({ ...body, password: await Bcrypt.hash(body.password) });
+  async insertOne(body: SignupBaseUserDto) {
+    return User.create({ ...body, password: await Bcrypt.hash(body.password) });
+  }
 
-    if (!assignToken) {
-      return;
-    }
-
+  async signup(body: SignupBaseUserDto, res: Response) {
+    const { id } = await this.insertOne(body);
     this.assignToken(id, res);
   }
 

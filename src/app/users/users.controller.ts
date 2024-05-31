@@ -16,7 +16,7 @@ export class UsersController {
   @UseBefore(IsLoggedOut)
   @OnUndefined(STATUS_CODES.CREATED)
   async signup(@Body() body: SignupUserBody, @Res() res: Response) {
-    await this.service.signup(body, res, true);
+    await this.service.signup(body, res);
   }
 
   @Post("/login")
