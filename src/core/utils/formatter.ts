@@ -5,7 +5,6 @@ export abstract class Formatter {
 
   static number(num: any) {
     return Number(num).toLocaleString("en", {
-      minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
   }
