@@ -22,6 +22,9 @@ export class Mongo {
   }) {
     const { model, pipelineStages, aggOptions, limit, page } = params;
     const [{ data, meta } = { data: [], meta: {} }] = await model.aggregate(pipelineStages, aggOptions);
-    return { data, ...Paginator.getMetadata(meta.total, limit, page) };
+  public static getModelFields(model: Model<any>, type: "pick" | "omit" = "omit", fields: string[] = []) {
+    const schemaTree = (model.schema as any).tree;
+    const selectedFields = Obj.omit(Obj[type](schemaTree, fields), ["__v", "id"]);
+    return Object.keys(selectedFields);
   }
 }

@@ -1,10 +1,10 @@
 import { IsArray, IsIn, IsNotEmpty } from "class-validator";
-import { PropertyAdSelectableFields } from "../property-ads.schema";
+import { PropertyAdFields } from "../property-ads.schema";
 import { FilterDto } from "../../../../core/dto";
 
 export class FindRelevantRequestsQuery extends FilterDto {
   @IsNotEmpty()
   @IsArray()
-  @IsIn(PropertyAdSelectableFields, { each: true })
+  @IsIn(PropertyAdFields, { each: true })
   fields: string[];
 }
