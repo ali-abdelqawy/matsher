@@ -1,31 +1,32 @@
-import { IsDecimal, IsIn, IsNotEmpty, IsString, MaxLength } from "class-validator";
+import { IsDecimal, IsIn, IsString, MaxLength } from "class-validator";
 import { PropertyRequestType } from "../property-requests.types";
 import { PROPERTY_TYPES } from "../property-requests.consts";
+import { IsRequired } from "../../../../core/decorators";
 
 export class InsertPropertyRequestBody {
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsIn(PROPERTY_TYPES)
   propertyType: PropertyRequestType;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsDecimal()
   areaMeters: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsDecimal()
   priceSar: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsString()
   @MaxLength(100)
   city: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsString()
   @MaxLength(100)
   district: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsString()
   @MaxLength(2000)
   description: string;

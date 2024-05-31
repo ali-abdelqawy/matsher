@@ -1,12 +1,13 @@
-import { IsNotEmpty, IsNumber, Min } from "class-validator";
+import { IsNumber, Min } from "class-validator";
+import { IsRequired } from "../decorators";
 
 export class FilterDto {
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsNumber()
   @Min(0)
   page: number;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsNumber()
   @Min(0)
   limit: number;

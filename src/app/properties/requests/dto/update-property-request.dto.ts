@@ -1,15 +1,16 @@
-import { IsDecimal, IsOptional, IsString, MaxLength } from "class-validator";
+import { IsDecimal, IsString, MaxLength } from "class-validator";
+import { IsRequired } from "../../../../core/decorators";
 
 export class UpdatePropertyRequestBody {
-  @IsOptional()
+  @IsRequired(false)
   @IsDecimal()
   areaMeters: string;
 
-  @IsOptional()
+  @IsRequired(false)
   @IsDecimal()
   priceSar: string;
 
-  @IsOptional()
+  @IsRequired(false)
   @IsString()
   @MaxLength(2000)
   description: string;

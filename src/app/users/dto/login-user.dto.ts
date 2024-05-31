@@ -1,12 +1,13 @@
-import { IsNotEmpty, IsPhoneNumber, IsString, MaxLength, MinLength } from "class-validator";
+import { IsPhoneNumber, IsString, MaxLength, MinLength } from "class-validator";
 import { IsStrongPassword } from "./rules";
+import { IsRequired } from "../../../core/decorators";
 
 export class LoginUserBody {
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsPhoneNumber()
   phone: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsString()
   @MinLength(20)
   @MaxLength(50)

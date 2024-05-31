@@ -1,20 +1,21 @@
-import { IsIn, IsNotEmpty, MaxLength, Matches, IsPhoneNumber, IsString, MinLength } from "class-validator";
+import { IsIn, MaxLength, Matches, IsPhoneNumber, IsString, MinLength } from "class-validator";
 import { USER_ROLES } from "../users.consts";
 import { UserRole } from "../users.types";
 import { IsUniquePhone, IsStrongPassword } from "./rules";
+import { IsRequired } from "../../../core/decorators";
 
 export class SignupBaseUserDto {
-  @IsNotEmpty()
+  @IsRequired(true)
   @Matches(/^[A-Za-z ]+$/)
   @MaxLength(100)
   name: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsPhoneNumber()
   @IsUniquePhone({ message: "phone must be unique" })
   phone: string;
 
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsString()
   @MinLength(20)
   @MaxLength(50)
@@ -25,7 +26,7 @@ export class SignupBaseUserDto {
 }
 
 export class SignupUserBody extends SignupBaseUserDto {
-  @IsNotEmpty()
+  @IsRequired(true)
   @IsIn(USER_ROLES.filter((role) => role !== "ADMIN"))
   role: Omit<UserRole, "ADMIN">;
 }
