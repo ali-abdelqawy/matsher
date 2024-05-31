@@ -7,3 +7,4 @@ export * from "./http-cookie";
 export * from "./obj";
 export * from "./gate";
 export * from "./paginator";
+export * from "./formatter";
