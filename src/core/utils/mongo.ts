@@ -4,7 +4,7 @@ import { AggregateOptions } from "mongoose";
 import { Paginator } from "./paginator";
 import { Obj } from "./obj";
 import { Formatter } from "./formatter";
-import { isDate, isNumberString } from "class-validator";
+import { isDate, isDecimal } from "class-validator";
 
 export class Mongo {
   public static formatFilter(options: FilterDto & { fields: string[] }) {
@@ -25,7 +25,7 @@ export class Mongo {
           ...(isDate(record[key]) && {
             [key]: Formatter.date(record[key]),
           }),
-          ...(isNumberString(record[key]) && {
+          ...(isDecimal(record[key].toString()) && {
             [key]: Formatter.number(record[key]),
           }),
         }),
