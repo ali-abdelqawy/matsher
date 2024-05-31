@@ -4,7 +4,7 @@ import { UserRole } from "../users.types";
 import { IsUniquePhone, IsStrongPassword } from "./decorators";
 import { IsRequired } from "../../../core/decorators";
 
-export class SignupBaseUserDto {
+export class SignupDto {
   @IsRequired(true)
   @Matches(/^[A-Za-z ]+$/)
   @MaxLength(100)
@@ -23,7 +23,7 @@ export class SignupBaseUserDto {
   password: string;
 }
 
-export class SignupUserBody extends SignupBaseUserDto {
+export class SignupUserBody extends SignupDto {
   @IsRequired(true)
   @IsIn(USER_ROLES.filter((role) => role !== "ADMIN"))
   role: Omit<UserRole, "ADMIN">;
