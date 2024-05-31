@@ -80,9 +80,6 @@ export const FindRelevantRequestsPipe = (id: string, skip: number, limit: number
             ],
           },
         },
-        {
-          $unwind: "$meta",
-        },
       ],
       as: "relevantRequests",
     },
