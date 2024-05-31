@@ -37,7 +37,7 @@ export class Mongo {
   public static async aggregate(params: {
     model: Model<any>;
     pipelineStages: any[];
-    aggOptions: AggregateOptions;
+    aggOptions?: AggregateOptions;
     limit: number;
     page: number;
   }) {
