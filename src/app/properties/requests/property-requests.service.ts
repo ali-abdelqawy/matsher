@@ -14,7 +14,7 @@ export class PropertyRequestsService {
   async updateOne(id: string, body: UpdatePropertyRequestBody, userId: ObjectId, res: Response) {
     const isCreator = await Gate.isCreator(id, PropertyRequest, userId);
     if (!isCreator) {
-      res.sendStatus(403);
+      res.sendStatus(STATUS_CODES.UNAUTHORIZED);
       return;
     }
 

@@ -38,13 +38,13 @@ export class UsersService {
 
     const user = await this.findOne({ phone }, { password: 1 });
     if (!user) {
-      res.sendStatus(401);
+      res.sendStatus(STATUS_CODES.UNAUTHORIZED);
       return;
     }
 
     const arePasswordsMatched = await Bcrypt.compare(password, user!.password);
     if (!arePasswordsMatched) {
-      res.sendStatus(401);
+      res.sendStatus(STATUS_CODES.UNAUTHORIZED);
       return;
     }
 
