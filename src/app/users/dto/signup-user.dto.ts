@@ -1,7 +1,7 @@
 import { IsIn, MaxLength, Matches, IsPhoneNumber, IsString, MinLength } from "class-validator";
 import { USER_ROLES } from "../users.consts";
 import { UserRole } from "../users.types";
-import { IsUniquePhone, IsStrongPassword } from "./rules";
+import { IsUniquePhone, IsStrongPassword } from "./decorators";
 import { IsRequired } from "../../../core/decorators";
 
 export class SignupBaseUserDto {
