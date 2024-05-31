@@ -7,7 +7,11 @@ export function IsStrongPassword(validationOptions?: ValidationOptions) {
       name: "isStrongPassword",
       target: object.constructor,
       propertyName,
-      options: validationOptions,
+      options: {
+        message:
+          "password must be strong, you can generate a strong one using this website: https://passwordsgenerator.net/",
+        ...validationOptions,
+      },
       validator: {
         validate(value: any) {
           return typeof value === "string" && PasswordChecker.check(value).score === 4;

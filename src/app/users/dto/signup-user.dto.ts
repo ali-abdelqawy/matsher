@@ -19,9 +19,7 @@ export class SignupBaseUserDto {
   @IsString()
   @MinLength(20)
   @MaxLength(50)
-  @IsStrongPassword({
-    message: "password must be strong, you generate a strong one using this website: https://passwordsgenerator.net/",
-  })
+  @IsStrongPassword()
   password: string;
 }
 
