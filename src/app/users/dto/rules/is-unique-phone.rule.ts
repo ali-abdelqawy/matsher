@@ -14,7 +14,10 @@ export function IsUniquePhone(validationOptions?: ValidationOptions) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
-      options: validationOptions,
+      options: {
+        message: "phone must be unique",
+        ...validationOptions,
+      },
       constraints: [],
       validator: IsUniquePhoneConstraint,
     });

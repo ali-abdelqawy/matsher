@@ -12,7 +12,7 @@ export class SignupBaseUserDto {
 
   @IsRequired(true)
   @IsPhoneNumber()
-  @IsUniquePhone({ message: "phone must be unique" })
+  @IsUniquePhone()
   phone: string;
 
   @IsRequired(true)
