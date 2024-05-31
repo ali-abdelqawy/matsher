@@ -2,7 +2,7 @@ import { Body, Get, JsonController, OnUndefined, Post, QueryParams, Res, UseBefo
 import { UsersService } from "./users.service";
 import { FindUserStatsQuery, LoginUserBody, SignupUserBody } from "./dto";
 import { Response } from "express";
-import { IsLoggedOut } from "../../core/middlewares";
+import { Authorize, IsLoggedOut } from "../../core/middlewares";
 
 @JsonController("/users", { transformResponse: false })
 export class UsersController {
@@ -33,6 +33,7 @@ export class UsersController {
   }
 
   @Get("/stats")
+  @UseBefore(Authorize(new Set(["ADMIN"])))
   async findStats(@QueryParams() query: FindUserStatsQuery) {
     return this.service.findStats(query);
   }
