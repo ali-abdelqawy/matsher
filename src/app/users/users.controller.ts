@@ -1,6 +1,6 @@
 import { Body, JsonController, OnUndefined, Post, Res, UseBefore } from "routing-controllers";
 import { UsersService } from "./users.service";
-import { LoginUserBody, SignupBaseUserBody } from "./dto";
+import { LoginUserBody, SignupUserBody } from "./dto";
 import { Response } from "express";
 import { IsNotAuthenticated } from "../../core/middlewares";
 
@@ -15,7 +15,7 @@ export class UsersController {
   @Post("/signup")
   @UseBefore(IsNotAuthenticated)
   @OnUndefined(STATUS_CODES.CREATED)
-  async signup(@Body() body: SignupBaseUserBody, @Res() res: Response) {
+  async signup(@Body() body: SignupUserBody, @Res() res: Response) {
     await this.service.signup(body, res, true);
   }
 
