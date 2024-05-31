@@ -1,6 +1,7 @@
 import { FilterQuery, InferRawDocType, Schema, model, ObjectId } from "mongoose";
 import { USER_ROLES, USER_STATUSES } from "./users.consts";
 import { ProjectionType } from "mongoose";
+import { Mongo } from "../../core/utils";
 
 const UserSchemaDefinition = {
   name: { type: String, required: true },
@@ -15,6 +16,7 @@ const UserSchema = new Schema(UserSchemaDefinition, {
 });
 
 export const User = model("User", UserSchema);
+export const UserFields = Mongo.getModelFields(User, "omit", ["password"]);
 export type UserDoc = InferRawDocType<typeof UserSchemaDefinition> & { _id: ObjectId };
 export type UserFilter = FilterQuery<InferRawDocType<typeof UserSchemaDefinition>>;
 export type UserProjection = ProjectionType<UserFilter>;

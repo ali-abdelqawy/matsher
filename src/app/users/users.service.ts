@@ -1,5 +1,7 @@
-import { Bcrypt, HttpCookie, JWT } from "../../core/utils";
+import { Bcrypt, HttpCookie, JWT, Mongo } from "../../core/utils";
 import { LoginUserBody, SignupBaseUserDto } from "./dto";
+import { FindUserStatsQuery } from "./dto/find-user-stats.dto";
+import { FindUserStatsPipe } from "./pipes";
 import { UserFilter, User, UserProjection } from "./users.schema";
 import { Response } from "express";
 
@@ -52,5 +54,15 @@ export class UsersService {
 
   logout(res: Response) {
     HttpCookie.clear("token", res);
+  }
+
+  async findStats(query: FindUserStatsQuery) {
+    const { skip, limit, project } = Mongo.formatFilter(query);
+    return Mongo.aggregate({
+      model: User,
+      pipelineStages: FindUserStatsPipe(skip, limit, project),
+      page: query.page,
+      limit,
+    });
   }
 }
