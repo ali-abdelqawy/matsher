@@ -1,2 +1,2 @@
-export * from "./is-not-authenticated.middleware";
+export * from "./is-logged-out.middleware";
 export * from "./authorize.middleware";

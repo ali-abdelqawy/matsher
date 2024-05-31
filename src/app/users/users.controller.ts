@@ -2,7 +2,7 @@ import { Body, JsonController, OnUndefined, Post, Res, UseBefore } from "routing
 import { UsersService } from "./users.service";
 import { LoginUserBody, SignupUserBody } from "./dto";
 import { Response } from "express";
-import { IsNotAuthenticated } from "../../core/middlewares";
+import { IsLoggedOut } from "../../core/middlewares";
 
 @JsonController("/users", { transformResponse: false })
 export class UsersController {
@@ -13,14 +13,14 @@ export class UsersController {
   }
 
   @Post("/signup")
-  @UseBefore(IsNotAuthenticated)
+  @UseBefore(IsLoggedOut)
   @OnUndefined(STATUS_CODES.CREATED)
   async signup(@Body() body: SignupUserBody, @Res() res: Response) {
     await this.service.signup(body, res, true);
   }
 
   @Post("/login")
-  @UseBefore(IsNotAuthenticated)
+  @UseBefore(IsLoggedOut)
   @OnUndefined(STATUS_CODES.OK)
   async login(@Body() body: LoginUserBody, @Res() res: Response) {
     await this.service.login(body, res);
