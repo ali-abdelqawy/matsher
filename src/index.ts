@@ -3,10 +3,10 @@ import "./core/globals";
 import path from "path";
 import express from "express";
 import { useExpressServer } from "routing-controllers";
-import { Mongo } from "./core/utils";
 import cookieParser from "cookie-parser";
+import { Db } from "./core/db";
 
-Mongo.get().connect();
+Db.get().connect();
 
 let app = express();
 

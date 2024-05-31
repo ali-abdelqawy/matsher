@@ -1,29 +1,9 @@
-import mongoose, { Model, Mongoose } from "mongoose";
+import { Model } from "mongoose";
 import { FilterDto } from "../dto";
 import { AggregateOptions } from "mongoose";
 import { Paginator } from "./paginator";
 
 export class Mongo {
-  private static instance: Mongo;
-  private db: Mongoose;
-
-  private constructor() {
-    this.db = mongoose;
-  }
-
-  public static get(): Mongo {
-    if (!Mongo.instance) {
-      Mongo.instance = new Mongo();
-    }
-
-    return Mongo.instance;
-  }
-
-  public async connect() {
-    await this.db.connect(process.env.DB_HOST);
-    console.log("mongo db is up and running!");
-  }
-
   public static formatFilter(options: FilterDto & { fields: string[] }) {
     const { fields, limit, page } = options;
     return {
