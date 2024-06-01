@@ -1,4 +1,4 @@
-import { Body, JsonController, OnUndefined, Post, Res, UseBefore } from "routing-controllers";
+import { Body, JsonController, OnUndefined, Post, UseBefore } from "routing-controllers";
 import { AdminsService } from "./admins.service";
 import { Authorize } from "../../core/middlewares";
 import { SignupAdminBody } from "./dto";

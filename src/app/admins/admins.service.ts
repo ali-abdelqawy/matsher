@@ -1,5 +1,5 @@
-import { SignupUserBody } from "../users/dto";
 import { UsersService } from "../users/users.service";
+import { SignupAdminBody } from "./dto";
 
 export class AdminsService {
   private usersService: UsersService;
@@ -8,7 +8,7 @@ export class AdminsService {
     this.usersService = new UsersService();
   }
 
-  async insertOne(body: SignupUserBody) {
+  async insertOne(body: SignupAdminBody) {
     await this.usersService.insertOne(body);
   }
 }

@@ -1,8 +1,8 @@
 import { IsPhoneNumber, IsString, MaxLength, MinLength } from "class-validator";
-import { IsStrongPassword } from "./decorators";
+import { IsStrongPassword } from "../../users/dto/decorators";
 import { IsRequired } from "../../../core/decorators";
 
-export class LoginUserBody {
+export class LoginBody {
   @IsRequired(true)
   @IsPhoneNumber()
   phone: string;

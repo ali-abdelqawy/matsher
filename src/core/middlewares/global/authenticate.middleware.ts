@@ -1,7 +1,7 @@
 import { isJWT } from "class-validator";
 import { Request, Response } from "express";
 import { JWT, Obj } from "../../utils";
-import { UsersService } from "../../../app/users/users.service";
+import { UsersService } from "../../../app/users";
 import { WHITELISTED, whitelist } from "../whitelist";
 import { Middleware } from "routing-controllers";
 

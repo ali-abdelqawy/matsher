@@ -9,11 +9,11 @@ export const WHITELISTED: { [index: string]: Endpoint[] } = {
   AUTH: [
     {
       method: "post",
-      path: "/users/signup",
+      path: "/auth/signup",
     },
     {
       method: "post",
-      path: "/users/login",
+      path: "/auth/login",
     },
   ],
 };
