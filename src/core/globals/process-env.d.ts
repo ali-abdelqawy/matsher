@@ -10,7 +10,7 @@ declare global {
       JWT_SECRET: string;
       JWT_ALGORITHM: Algorithm;
       TOKEN_EXPIRES_IN: string;
-      SERVER_TIMEOUT_IN_MS: number;
+      SERVER_TIMEOUT_MS: number;
     }
   }
 }

@@ -23,6 +23,4 @@ app = useExpressServer(app, {
   controllers: [join(`${__dirname}/**/*.controller.{js,ts}`)],
 });
 
-app
-  .listen(process.env.PORT, () => console.log("api is up and running!"))
-  .setTimeout(Number(process.env.SERVER_TIMEOUT_IN_MS));
+app.listen(process.env.PORT, () => console.log("api is up and running!")).setTimeout(Number(process.env.SERVER_TIMEOUT_MS));
