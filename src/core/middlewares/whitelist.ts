@@ -16,6 +16,12 @@ export const WHITELISTED: { [index: string]: Endpoint[] } = {
       path: "/auth/login",
     },
   ],
+  DOCS: [
+    {
+      method: "get",
+      path: "/",
+    },
+  ],
 };
 
 export const whitelist = (endpoint: Endpoint, whitelisted: Endpoint[]) => {

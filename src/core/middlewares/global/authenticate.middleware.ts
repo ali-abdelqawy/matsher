@@ -8,7 +8,7 @@ import { Middleware } from "routing-controllers";
 @Middleware({ type: "before", priority: 2 })
 export class Authenticate {
   async use(req: Request, res: Response, next: (err?: any) => any) {
-    if (whitelist(Obj.pick(req, ["method", "path"]), WHITELISTED.AUTH)) {
+    if (whitelist(Obj.pick(req, ["method", "path"]), [...WHITELISTED.AUTH, ...WHITELISTED.DOCS])) {
       return next();
     }
 
