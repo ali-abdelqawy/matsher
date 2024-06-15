@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import "./core/globals";
-import path from "path";
+import { join } from "path";
 import express from "express";
 import { useExpressServer } from "routing-controllers";
 import cookieParser from "cookie-parser";
@@ -19,8 +19,8 @@ app = useExpressServer(app, {
     forbidNonWhitelisted: true,
   },
   defaultErrorHandler: false,
-  middlewares: [path.join(`${__dirname}/**/global/*.middleware.{js,ts}`)],
-  controllers: [path.join(`${__dirname}/**/*.controller.{js,ts}`)],
+  middlewares: [join(`${__dirname}/**/global/*.middleware.{js,ts}`)],
+  controllers: [join(`${__dirname}/**/*.controller.{js,ts}`)],
 });
 
 app
