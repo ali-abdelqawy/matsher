@@ -12,7 +12,7 @@ export class AdminsController {
   }
 
   @Post()
-  @UseBefore(Authorize(new Set(["ADMIN"])))
+  @UseBefore(Authorize(["ADMIN"]))
   @OnUndefined(STATUS_CODES.CREATED)
   async insertOne(@Body() body: SignupAdminBody) {
     await this.service.insertOne(body);

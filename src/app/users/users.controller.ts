@@ -12,7 +12,7 @@ export class UsersController {
   }
 
   @Get("/stats")
-  @UseBefore(Authorize(new Set(["ADMIN"])))
+  @UseBefore(Authorize(["ADMIN"]))
   async findStats(@QueryParams() query: FindUserStatsQuery) {
     return this.service.findStats(query);
   }

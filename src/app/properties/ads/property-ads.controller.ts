@@ -16,14 +16,14 @@ export class PropertyAdsController {
   }
 
   @Post()
-  @UseBefore(Authorize(new Set(["AGENT"])))
+  @UseBefore(Authorize(["AGENT"]))
   @OnUndefined(STATUS_CODES.CREATED)
   async insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
     await this.service.insertOne(body, user);
   }
 
   @Get("/:id/relevant-requests")
-  @UseBefore(Authorize(new Set(["CLIENT"])))
+  @UseBefore(Authorize(["CLIENT"]))
   findRelevantRequests(@Params() params: IdDto, @QueryParams() query: FindRelevantRequestsQuery) {
     return this.service.findRelevantRequests(params.id, query);
   }
