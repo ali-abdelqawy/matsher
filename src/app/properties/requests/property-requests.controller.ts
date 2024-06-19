@@ -18,18 +18,18 @@ export class PropertyRequestsController {
 
   @Post()
   @OnUndefined(STATUS_CODES.CREATED)
-  insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
-    return this.service.insertOne(body, user);
+  async insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
+    await this.service.insertOne(body, user);
   }
 
   @Patch("/:id")
   @OnUndefined(STATUS_CODES.OK)
-  updateOne(
+  async updateOne(
     @Params() params: IdDto,
     @Body() body: UpdatePropertyRequestBody,
     @User() user: LoggedUser,
     @Res() res: Response
   ) {
-    return this.service.updateOne(params.id, body, user._id, res);
+    await this.service.updateOne(params.id, body, user._id, res);
   }
 }

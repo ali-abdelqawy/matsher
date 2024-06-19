@@ -18,8 +18,8 @@ export class PropertyAdsController {
   @Post()
   @UseBefore(Authorize(new Set(["AGENT"])))
   @OnUndefined(STATUS_CODES.CREATED)
-  insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
-    return this.service.insertOne(body, user);
+  async insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
+    await this.service.insertOne(body, user);
   }
 
   @Get("/:id/relevant-requests")
