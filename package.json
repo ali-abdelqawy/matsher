@@ -4,16 +4,14 @@
   "description": "A matching system that connects property requests with relevant ads based on specific criteria.",
   "main": "src/index.js",
   "scripts": {
-    "clean": "node scripts/clean",
-    "prebuild": "npm run clean",
+    "prebuild": "node scripts/clean",
     "build": "swc src -d dist",
     "prestart": "npm run build",
     "start": "node dist/src/index",
     "dev": "nodemon --watch src --ext '*' --exec \"npm run start\"",
     "dock:build": "docker build -t matsher-dev-api .",
     "dock:purge": "docker rm matsher-dev-api",
-    "copy-dotenv": "node scripts/copy-dotenv",
-    "preup:dev": "npm run copy-dotenv",
+    "preup:dev": "node scripts/copy-dotenv",
     "up:dev": "docker-compose -f compose.dev.yml up",
     "up-rebuild": "docker-compose -f compose.dev.yml up --build"
   },
