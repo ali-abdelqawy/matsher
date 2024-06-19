@@ -9,11 +9,10 @@ export class Db {
   }
 
   public static get(): Db {
-    if (!Db.instance) {
-      Db.instance = new Db();
+    if (!this.instance) {
+      this.instance = new Db();
     }
-
-    return Db.instance;
+    return this.instance;
   }
 
   public async connect() {
