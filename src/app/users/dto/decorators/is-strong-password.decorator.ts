@@ -1,5 +1,5 @@
 import { registerDecorator, ValidationOptions } from "class-validator";
-import { PasswordChecker } from "../../../../core/utils";
+import { Zxcvbn } from "../../../../core/utils";
 
 export function IsStrongPassword(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
@@ -14,7 +14,7 @@ export function IsStrongPassword(validationOptions?: ValidationOptions) {
       },
       validator: {
         validate(value: any) {
-          return typeof value === "string" && PasswordChecker.check(value).score === 4;
+          return typeof value === "string" && Zxcvbn.check(value).score === 4;
         },
       },
     });
