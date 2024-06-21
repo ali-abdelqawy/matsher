@@ -9,8 +9,8 @@
     "prestart": "npm run build",
     "start": "node dist/src/index",
     "dev": "nodemon --watch src --ext '*' --exec \"npm run start\"",
-    "dock:build": "docker build -t matsher-dev-api .",
-    "dock:purge": "docker rm matsher-dev-api",
+    "dock:build:dev": "docker build -t matsher-dev-api .",
+    "dock:purge:dev": "docker rm matsher-dev-api",
     "preup:dev": "node scripts/copy-dotenv",
     "up:dev": "docker-compose -f compose.dev.yml up",
     "up-rebuild": "docker-compose -f compose.dev.yml up --build"
