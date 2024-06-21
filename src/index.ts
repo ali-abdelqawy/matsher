@@ -8,9 +8,7 @@ import { PUBLIC_FOLDER_PATH } from "./core/constants";
 import { Db } from "./core/db";
 import { Swagger } from "./core/swagger";
 
-let app = express();
-app.use(cookieParser(), express.static(PUBLIC_FOLDER_PATH));
-app = useExpressServer(app, {
+const app = useExpressServer(express().use(cookieParser(), express.static(PUBLIC_FOLDER_PATH)), {
   routePrefix: "/api",
   validation: {
     whitelist: true,
