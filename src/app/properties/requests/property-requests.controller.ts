@@ -1,4 +1,5 @@
 import { Body, JsonController, OnUndefined, Params, Patch, Post, UseBefore } from "routing-controllers";
+import { OpenAPI } from "routing-controllers-openapi";
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
 import { IdDto } from "../../../core/dto";
@@ -17,6 +18,24 @@ export class PropertyRequestsController {
   }
 
   @Post()
+  @OpenAPI({
+    summary: "Create a new property request",
+    description: "This endpoint allows clients to add a new property request to express what he/she is looking for",
+    responses: {
+      "400": {
+        description: "Invalid input",
+      },
+      "401": {
+        description: "User is not authenticated",
+      },
+      "403": {
+        description: "The authenticated user is not a client",
+      },
+      "201": {
+        description: "Created successfully",
+      },
+    },
+  })
   @OnUndefined(STATUS_CODES.CREATED)
   async insertOne(@Body() body: InsertPropertyRequestBody, @User() user: LoggedUser) {
     await this.service.insertOne(body, user);
