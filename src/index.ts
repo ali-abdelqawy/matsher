@@ -1,9 +1,8 @@
-import "reflect-metadata";
-import "./core/globals";
-import { join } from "path";
+import "./init";
+import cookieParser from "cookie-parser";
 import express from "express";
 import { useExpressServer } from "routing-controllers";
-import cookieParser from "cookie-parser";
+import { join } from "path";
 import { PUBLIC_FOLDER_PATH } from "./core/constants";
 import { Db } from "./core/db";
 import { Swagger } from "./core/swagger";
