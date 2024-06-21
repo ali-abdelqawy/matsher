@@ -32,7 +32,7 @@ export class Authenticate {
       return;
     }
 
-    res.locals.user = user!.toJSON();
+    res.locals.user = user.toJSON();
 
     next();
   }
