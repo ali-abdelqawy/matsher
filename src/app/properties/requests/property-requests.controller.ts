@@ -1,4 +1,4 @@
-import { Body, JsonController, OnUndefined, Params, Patch, Post, Res, UseBefore } from "routing-controllers";
+import { Body, JsonController, OnUndefined, Params, Patch, Post, UseBefore } from "routing-controllers";
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
 import { IdDto } from "../../../core/dto";
