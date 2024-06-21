@@ -1,11 +1,11 @@
-import { Response } from "express";
 import { Body, JsonController, OnUndefined, Params, Patch, Post, Res, UseBefore } from "routing-controllers";
 import { PropertyRequestsService } from "./property-requests.service";
 import { InsertPropertyRequestBody, UpdatePropertyRequestBody } from "./dto";
 import { IdDto } from "../../../core/dto";
 import { User } from "../../../core/decorators";
 import { LoggedUser } from "../../users";
-import { Authorize } from "../../../core/middlewares";
+import { Authorize, IsCreator } from "../../../core/middlewares";
+import { PropertyRequest } from "./property-requests.schema";
 
 @JsonController("/property-requests", { transformResponse: false })
 @UseBefore(Authorize(["CLIENT"]))
@@ -23,13 +23,9 @@ export class PropertyRequestsController {
   }
 
   @Patch("/:id")
+  @UseBefore(IsCreator(PropertyRequest))
   @OnUndefined(STATUS_CODES.OK)
-  async updateOne(
-    @Params() params: IdDto,
-    @Body() body: UpdatePropertyRequestBody,
-    @User() user: LoggedUser,
-    @Res() res: Response
-  ) {
-    await this.service.updateOne(params.id, body, user._id, res);
+  async updateOne(@Params() params: IdDto, @Body() body: UpdatePropertyRequestBody) {
+    await this.service.updateOne(params.id, body);
   }
 }
